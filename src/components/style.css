@@ -1,0 +1,687 @@
+:root {
+    --primary-color: #a855f7;
+    --secondary-color: #6b21a8; 
+    --background-dark: #1a1a1a;
+    --text-light: #ffffff;
+    --text-muted: #d8b4fe;
+    --gradient-1: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%);
+    --gradient-2: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    --gradient-hover: linear-gradient(135deg, #9333ea 0%, #581c87 100%);
+    --container-bg: rgba(255, 255, 255, 0.03);
+    --container-border: rgba(168, 85, 247, 0.1);
+    --container-shadow: rgba(168, 85, 247, 0.1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', 'Segoe UI', sans-serif;
+    letter-spacing: 0.2px;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .header {
+    background: rgba(0, 0, 0, 0.0001);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    /* z-index: 100; */
+    box-shadow: 0 4px 30px rgba(168, 85, 247, 0.15);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .logo {
+    margin-right: auto; 
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+  
+  }
+
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 992px) {
+    .nav {
+      padding: 0 1rem;
+    }
+
+    .nav-items {
+      display: none;
+    }
+
+    .nav-items.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.95);
+      padding: 2rem;
+      gap: 1.5rem;
+      z-index: 1000;
+    }
+
+    /* Hide all nav items except donate button in the main view */
+    .nav-link, .login-btn, #google_translate_element {
+      display: none;
+    }
+
+    /* Show them only when menu is active */
+    .nav-items.active .nav-link,
+    .nav-items.active .login-btn,
+    .nav-items.active #google_translate_element {
+      display: block;
+    }
+
+    /* Keep donate button visible */
+    .donate-btn {
+      display: block;
+    }
+
+    /* Ensure hamburger is visible */
+    .hamburger {
+      display: block;
+      margin-left: 1rem;
+    }
+
+    /* Keep logo visible */
+    .logo {
+      display: flex;
+    }
+
+    /* Adjust nav layout */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .nav-items {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-link, .donate-btn {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 0.25rem;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .donate-btn {
+    background: var(--gradient-2);
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  }
+
+  .donate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  }
+
+  .login-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    padding: 0.7rem 1.8rem;
+    border-radius: 30px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background: var(--gradient-1);
+    color: white;
+    border-color: transparent;
+  }
+
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.0001), rgba(0,0,0,0.0001)), 
+                url('https://i.postimg.cc/2yXmf4y5/Domestic-Violence-The-Conversation-1024x504.jpg'),
+                var(--gradient-1);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    padding-top: 80px;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50% }
+    50% { background-position: 100% 50% }
+    100% { background-position: 0% 50% }
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    color: white;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  .action-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--gradient-1);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+  }
+
+  .action-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+  }
+
+  .section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin-top:1rem;
+    background: var(--container-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--container-border);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px var(--container-shadow);
+  }
+
+  .section-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 3rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-1);
+    margin: 1rem auto;
+    border-radius: 2px;
+  }
+
+  .content-grid, .services-grid, .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .service-card, .impact-stat, .feature-card, .testimonial-card, .quick-link-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 15px;
+    padding: 2.5rem 2rem;
+    transition: all 0.4s ease;
+  }
+
+  .service-card:hover, .impact-stat:hover, .feature-card:hover, 
+  .testimonial-card:hover, .quick-link-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+  }
+
+  .testimonial-card p {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+  }
+
+  .testimonial-card cite {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+
+  .footer {
+    background: rgba(0, 0, 0, 0.0001);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 4rem;
+    padding: 2rem;
+  }
+
+  .footer-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  .footer-content p,
+  .footer-content a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+
+  .footer-content a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+    transform: translateX(5px);
+  }
+
+  .chart-container {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    margin-bottom: 2rem;
+    margin: 2rem auto;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .kenya-map {
+    width: 100%;
+    height: 600px;
+    margin: 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .chat-button:hover {
+    transform: scale(1.1);
+  }
+
+  .chat-button i {
+    color: white;
+    font-size: 24px;
+  }
+
+  .quick-links {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.1);
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .quick-link-card {
+    background: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+  }
+
+  .quick-link-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+  }
+
+  .quick-link-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .quick-link-card h4 {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+
+  #google_translate_element {
+    width:120x;
+    margin-left: 1rem;
+    overflow: hidden;
+    color: var(--text-light);
+  }
+
+  #google_translate_element .goog-te-gadget-simple {
+    background-color: transparent;
+    border: 2px solid var(--primary-color); 
+     border-radius: 30px;
+     padding: 0.5rem 1rem;
+    color: var(--text-light);
+    overflow: hidden;
+    width: 160px;
+  }
+
+  .goog-te-gadget-simple  {
+    color: var(--text-light);
+}
+  @media (max-width: 1200px) {
+    .section {
+      padding: 120px 2rem 2rem 2rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .chart-container {
+      padding: 1rem;
+      overflow-x: scroll;
+    }
+
+    .kenya-map {
+      height: 400px;
+    }
+
+    .chat-button {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+    }
+    
+    .quick-links {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      padding: 0.8rem;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .header {
+      padding: 0.6rem;
+    }
+
+    .nav-items.active {
+      padding: 1.5rem;
+    }
+
+    .hero-content {
+      padding: 1rem;
+    }
+
+    .stat-card {
+      padding: 1rem;
+    }
+
+    .chart-container {
+      margin: 1rem 0;
+    }
+
+    .kenya-map {
+      height: 300px;
+    }
+  }
+
+  /* Fix for leaflet map controls on mobile */
+  .leaflet-touch .leaflet-control-zoom {
+    display: none;
+  }
+
+  /* Improved touch targets for mobile */
+  .amount-option,
+  .nav-link,
+  .form-group input,
+  .form-group select {
+    min-height: 44px;
+  }
+
+  /* Custom popup styles */
+  .custom-popup .leaflet-popup-content-wrapper {
+    background: rgba(255,255,255,0.95);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .custom-popup .leaflet-popup-tip {
+    background: rgba(255,255,255,0.95);
+  }
+
+  .testimonial-swiper {
+    width: 100%;
+    padding: 50px 0;
+    position: relative;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .testimonial-card {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+  }
+
+  .swiper-pagination-bullet {
+    background: var(--primary-color);
+    opacity: 0.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--primary-color);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
+    
+    .testimonial-card {
+      width: 95%;
+    }
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 15px;
+    padding: 1.5rem;  /* Reduced padding */
+    transition: all 0.4s ease;
+    text-align: center;
+    max-width: 300px;  /* Added max-width */
+    margin: 0 auto;
+  }
+
+  .feature-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.2rem;  /* Reduced font size */
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;  /* Reduced font size */
+    color: var(--text-muted);
+  }
+
+  /* Update the features-grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+  }
